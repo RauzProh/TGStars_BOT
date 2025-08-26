@@ -13,15 +13,6 @@ from db.beanie.models.models import User  # импорт модели User
 router = Router()
 router.message.filter(IsAdmin())
 
-@router.message(Command("admin"))
-async def admin_menu(msg: Message, state: FSMContext):
-    await msg.answer(
-        text=tmenu.menu_text,
-        reply_markup=tmenu.menu_ikb()
-    )
-    await msg.delete()
-
-
 @router.message(Command("export_users"))
 async def export_users(msg: Message):
     # Получаем всех пользователей из БД
