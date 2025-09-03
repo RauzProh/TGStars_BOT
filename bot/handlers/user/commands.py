@@ -32,12 +32,10 @@ async def new_user_start(msg: Message, state: FSMContext, command: Command):
     #     return
 
     invite_link = await msg.bot.create_chat_invite_link(
-        chat_id=-cnf.bot.channel_id,
+        chat_id=cnf.bot.channel_id,
         name=f"Referral_{msg.from_user.id}",  # уникальное имя ссылки
         creates_join_request=False  # сразу добавляет в канал
     )
-    await User.create(tg_id=tg_id,full_name=full_name, reflink=invite_link.invite_link)
-    
     await msg.answer(f"🔗 Вот твоя сгенерированная ссылка: {invite_link.invite_link}")
     await msg.delete()
     
